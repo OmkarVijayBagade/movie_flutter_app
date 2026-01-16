@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../services/local_storage.dart';
+import '../home/home_screen.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -31,8 +33,13 @@ class OnboardingScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
-                  // TEMP: navigation later
+                onPressed: () async {
+                  await LocalStorage.setOnboardingCompleted();
+
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (_) => const HomeScreen()),
+                  );
                 },
                 child: const Text('Get Started'),
               ),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'screens/onboarding/onboarding_screen.dart';
+import 'screens/home/home_screen.dart';
+import 'services/local_storage.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MovieApp());
 }
 
@@ -20,7 +23,7 @@ class MovieApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const OnboardingScreen(),
+      home: const SplashDecider(),
     );
   }
 }
@@ -30,17 +33,17 @@ class SplashDecider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TEMP: direct home, onboarding later
-    return const Scaffold(
-      body: Center(
-        child: Text(
-          'Movie Explorer',
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
+    return FutureBuilder<bool>(
+      future: LocalStorage.isOnboardingCompleted(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+
+        return snapshot.data! ? const HomeScreen() : const OnboardingScreen();
+      },
     );
   }
 }

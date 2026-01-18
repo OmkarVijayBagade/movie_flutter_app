@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/onboarding/onboarding_screen.dart';
 import 'screens/home/home_screen.dart';
 import 'services/local_storage.dart';
+import 'core/navigation/app_shell.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,7 +43,7 @@ class SplashDecider extends StatelessWidget {
           );
         }
 
-        return snapshot.data! ? const HomeScreen() : const OnboardingScreen();
+        return snapshot.data! ? const AppShell() : const OnboardingScreen();
       },
     );
   }

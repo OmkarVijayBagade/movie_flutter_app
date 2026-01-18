@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../services/local_storage.dart';
 import '../home/home_screen.dart';
+import '../../core/navigation/app_shell.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -38,7 +39,7 @@ class OnboardingScreen extends StatelessWidget {
 
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => const HomeScreen()),
+                    MaterialPageRoute(builder: (_) => const AppShell()),
                   );
                 },
                 child: const Text('Get Started'),

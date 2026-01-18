@@ -54,17 +54,53 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(Icons.error_outline, size: 64, color: Colors.red),
+                              Icon(
+                                Icons.movie_outlined,
+                                size: 80,
+                                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+                              ),
                               const SizedBox(height: 16),
+                              Text(
+                                'No movies available',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  color: Theme.of(context).colorScheme.onSurface,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
                               Text(
                                 movieProvider.error!,
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(fontSize: 16),
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                                ),
                               ),
-                              const SizedBox(height: 20),
-                              ElevatedButton(
-                                onPressed: movieProvider.loadPopularMovies,
-                                child: const Text('Retry'),
+                              const SizedBox(height: 24),
+                              ElevatedButton.icon(
+                                onPressed: () {
+                                  setState(() {
+                                    _showErrorsAfterDelay = false;
+                                  });
+                                  movieProvider.loadPopularMovies();
+                                  // Reset the delay timer
+                                  Future.delayed(const Duration(seconds: 2), () {
+                                    if (mounted) {
+                                      setState(() {
+                                        _showErrorsAfterDelay = true;
+                                      });
+                                    }
+                                  });
+                                },
+                                icon: const Icon(Icons.refresh),
+                                label: const Text('Try Again'),
+                                style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 24,
+                                    vertical: 12,
+                                  ),
+                                ),
                               ),
                             ],
                           ),

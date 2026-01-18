@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../models/movie.dart';
-import '../../../services/movie_api_service.dart';
 import '../../movie_detail/movie_detail_screen.dart';
 
 class CategoryRow extends StatelessWidget {
@@ -43,7 +42,7 @@ class CategoryRow extends StatelessWidget {
               }
 
               if (snapshot.hasError) {
-                return const Center(child: Text('Failed to load'));
+                return const Center(child: Text('Unable to load movies'));
               }
 
               final movies = snapshot.data ?? [];

@@ -65,7 +65,7 @@ class _SearchScreenState extends State<SearchScreen> {
       });
     } catch (e) {
       setState(() {
-        error = 'Error: ${e.toString()}\n\nPlease try again.';
+        error = 'Unable to load movies. Please check your internet connection and try again.';
       });
     } finally {
       setState(() {
@@ -123,7 +123,7 @@ class _SearchScreenState extends State<SearchScreen> {
         });
       } catch (e) {
         setState(() {
-          error = 'Something went wrong';
+          error = 'Search failed. Please check your internet connection and try again.';
         });
       } finally {
         setState(() {
@@ -209,7 +209,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         });
                       } catch (e) {
                         setState(() {
-                          error = 'Failed to load movies by genre';
+                          error = 'Failed to load movies by genre. Please try again.';
                           isLoading = false;
                         });
                       }
@@ -227,7 +227,66 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
 
           if (error.isNotEmpty)
-            Padding(padding: const EdgeInsets.all(20), child: Text(error)),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.search_off,
+                    size: 60,
+                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Search Unavailable',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    error,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      setState(() {
+                        error = '';
+                        isLoading = true;
+                      });
+                      if (selectedGenreId != null) {
+                        // Retry loading movies by genre
+                        MovieApiService.fetchMoviesByGenre(selectedGenreId!).then((results) {
+                          setState(() {
+                            fullMovies = results;
+                            movies = results;
+                            isLoading = false;
+                          });
+                        }).catchError((e) {
+                          setState(() {
+                            error = 'Failed to load movies by genre. Please try again.';
+                            isLoading = false;
+                          });
+                        });
+                      } else {
+                        // Retry loading default movies
+                        loadDefaultMovies();
+                      }
+                    },
+                    icon: const Icon(Icons.refresh),
+                    label: const Text('Try Again'),
+                  ),
+                ],
+              ),
+            ),
 
           Expanded(
             child: ListView.builder(

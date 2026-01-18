@@ -246,10 +246,8 @@ If you have any questions or need help:
 
 - **Issues**: [GitHub Issues](https://github.com/OmkarVijayBagade/movie_flutter_app/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/OmkarVijayBagade/movie_flutter_app/discussions)
-- **Email**: omkar@example.com
+- **Email**: omkarbagade16@gmail.com
 
 ---
 
 **Made with ❤️ using Flutter**
-
-*Replace the placeholder screenshots in the `screenshots/` folder with actual app screenshots for a complete README experience.*

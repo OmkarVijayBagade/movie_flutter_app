@@ -35,7 +35,7 @@ class _AppShellState extends State<AppShell> {
             _currentIndex = index;
           });
         },
-        selectedItemColor: Colors.red,
+        selectedItemColor: Colors.green,
         unselectedItemColor: Colors.grey,
         type: BottomNavigationBarType.fixed,
         items: const [

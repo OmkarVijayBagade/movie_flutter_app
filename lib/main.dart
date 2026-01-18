@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/onboarding/onboarding_screen.dart';
-import 'screens/home/home_screen.dart';
+// import 'screens/home/home_screen.dart';
 import 'services/local_storage.dart';
 import 'core/navigation/app_shell.dart';
 
@@ -19,7 +19,7 @@ class MovieApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.red,
+          seedColor: Colors.green,
           brightness: Brightness.light,
         ),
         useMaterial3: true,

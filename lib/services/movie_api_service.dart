@@ -10,7 +10,7 @@ class MovieApiService {
   static Future<List<Movie>> fetchPopularMovies() async {
     final url = Uri.parse('$_baseUrl/movie/popular?api_key=$_apiKey');
 
-    final response = await http.get(url).timeout(const Duration(seconds: 10));
+    final response = await http.get(url).timeout(const Duration(seconds: 20));
 
     if (response.statusCode == 200) {
       final decodedData = jsonDecode(response.body);
@@ -27,7 +27,7 @@ class MovieApiService {
       '$_baseUrl/search/movie?api_key=$_apiKey&query=$query',
     );
 
-    final response = await http.get(url).timeout(const Duration(seconds: 10));
+    final response = await http.get(url).timeout(const Duration(seconds: 20));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
@@ -42,7 +42,7 @@ class MovieApiService {
   static Future<List<Genre>> fetchGenres() async {
     final url = Uri.parse('$_baseUrl/genre/movie/list?api_key=$_apiKey');
 
-    final response = await http.get(url).timeout(const Duration(seconds: 10));
+    final response = await http.get(url).timeout(const Duration(seconds: 20));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
@@ -59,7 +59,7 @@ class MovieApiService {
       '$_baseUrl/discover/movie?api_key=$_apiKey&with_genres=$genreId',
     );
 
-    final response = await http.get(url).timeout(const Duration(seconds: 10));
+    final response = await http.get(url).timeout(const Duration(seconds: 20));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);

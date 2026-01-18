@@ -44,13 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   String _getErrorMessage(Object e) {
-    if (e.toString().contains('SocketException')) {
-      return 'Network error. Please check your connection and try again.';
-    } else if (e.toString().contains('TimeoutException')) {
-      return 'Request timed out. Please try again.';
-    } else {
-      return 'Failed to load movies. Please try again.';
-    }
+    // For debugging, show the actual error
+    return 'Error: ${e.toString()}\n\nPlease try again.';
   }
 
   @override
@@ -85,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
               : movies.isEmpty
                   ? const Center(child: Text('No movies found'))
                   : ListView.builder(
+                      key: ValueKey(Theme.of(context).brightness),
                       padding: const EdgeInsets.all(12),
                       itemCount: movies.length,
                       itemBuilder: (context, index) {
@@ -149,13 +145,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                           movie.overview,
                                           maxLines: 3,
                                           overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(color: Colors.black54),
+                                          style: TextStyle(
+                                            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+                                          ),
                                         ),
                                         const SizedBox(height: 8),
                                         Text(
                                           '⭐ ${movie.rating.toStringAsFixed(1)}',
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             fontWeight: FontWeight.w600,
+                                            color: Theme.of(context).colorScheme.onSurface,
                                           ),
                                         ),
                                       ],

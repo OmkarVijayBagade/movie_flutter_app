@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../screens/home/home_screen.dart';
 import '../../screens/search/search_screen.dart';
 import '../../screens/settings/settings_screen.dart';
 import '../../screens/about/about_screen.dart';
+import '../../providers/settings_provider.dart';
 
 class AppShell extends StatefulWidget {
   const AppShell({super.key});
@@ -23,6 +25,8 @@ class _AppShellState extends State<AppShell> {
 
   @override
   Widget build(BuildContext context) {
+    final settings = Provider.of<SettingsProvider>(context);
+
     return Scaffold(
       body: IndexedStack(
         index: _currentIndex,
@@ -35,7 +39,7 @@ class _AppShellState extends State<AppShell> {
             _currentIndex = index;
           });
         },
-        selectedItemColor: Colors.green,
+        selectedItemColor: settings.selectedColor,
         unselectedItemColor: Colors.grey,
         type: BottomNavigationBarType.fixed,
         items: const [

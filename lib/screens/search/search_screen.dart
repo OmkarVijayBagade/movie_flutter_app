@@ -11,11 +11,10 @@ class SearchScreen extends StatefulWidget {
   State<SearchScreen> createState() => _SearchScreenState();
 }
 
-List<Genre> genres = [];
-
-int? selectedGenreId;
-
 class _SearchScreenState extends State<SearchScreen> {
+  List<Genre> genres = [];
+  int? selectedGenreId;
+
   @override
   void initState() {
     super.initState();
@@ -30,9 +29,22 @@ class _SearchScreenState extends State<SearchScreen> {
         genres = result;
       });
     } catch (e) {
-      // Handle error, perhaps show a message or retry
+      // Fallback to default genres if API fails
       setState(() {
-        error = 'Failed to load genres';
+        genres = [
+          Genre(id: 28, name: 'Action'),
+          Genre(id: 12, name: 'Adventure'),
+          Genre(id: 16, name: 'Animation'),
+          Genre(id: 35, name: 'Comedy'),
+          Genre(id: 80, name: 'Crime'),
+          Genre(id: 18, name: 'Drama'),
+          Genre(id: 14, name: 'Fantasy'),
+          Genre(id: 27, name: 'Horror'),
+          Genre(id: 9648, name: 'Mystery'),
+          Genre(id: 10749, name: 'Romance'),
+          Genre(id: 878, name: 'Sci-Fi'),
+          Genre(id: 53, name: 'Thriller'),
+        ];
       });
     }
   }
@@ -51,7 +63,7 @@ class _SearchScreenState extends State<SearchScreen> {
       });
     } catch (e) {
       setState(() {
-        error = 'Failed to load movies';
+        error = 'Error: ${e.toString()}\n\nPlease try again.';
       });
     } finally {
       setState(() {
@@ -148,10 +160,19 @@ class _SearchScreenState extends State<SearchScreen> {
                   child: FilterChip(
                     label: Text(genre.name),
                     selected: isSelected,
+                    backgroundColor: isSelected
+                        ? Theme.of(context).colorScheme.primaryContainer
+                        : Theme.of(context).colorScheme.surfaceContainerHighest,
+                    selectedColor: Theme.of(context).colorScheme.primary,
+                    checkmarkColor: Theme.of(context).colorScheme.onPrimary,
+                    labelStyle: TextStyle(
+                      color: isSelected
+                          ? Theme.of(context).colorScheme.onPrimary
+                          : Theme.of(context).colorScheme.onSurface,
+                    ),
                     onSelected: (selected) async {
                       setState(() {
                         selectedGenreId = selected ? genre.id : null;
-                        isLoading = true;
                         error = '';
                       });
 
@@ -159,6 +180,10 @@ class _SearchScreenState extends State<SearchScreen> {
                         await loadDefaultMovies();
                         return;
                       }
+
+                      setState(() {
+                        isLoading = true;
+                      });
 
                       try {
                         final results = await MovieApiService.fetchMoviesByGenre(

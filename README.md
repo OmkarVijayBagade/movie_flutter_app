@@ -9,15 +9,18 @@ A beautifully designed, feature-rich Flutter application for discovering and exp
 
 ## 📱 Screenshots
 
- ![Home](screenshots/movie1d1.png) | ![Details](screenshots/movie1d2.png) |
+### 🌙 Dark Mode
 
-|--------|----------|
-| ![Search](screenshots/movie1d3.png) | ![Settings](screenshots/movie1d4.png) |
+| Home | Search | Settings | About |
+|------|---------------|--------|----------|
+| <img src="screenshots/movie1d1.png" width="200"/> | <img src="screenshots/movie1d2.png" width="200"/> | <img src="screenshots/movie1d3.png" width="200"/> | <img src="screenshots/movie1d4.png" width="200"/> |
+---
 
-| ![Onboarding](screenshots/onboarding_screen.png) | ![Home](screenshots/movie1l1.png) | ![Details](screenshots/movie1l2.png) |
+### ☀️ Light Mode
 
-|--------|----------|
-| ![Search](screenshots/movie1l3.png) | ![Settings](screenshots/movie1l4.png) |
+| Home | Search | Settings | About |
+|------|---------------|--------|----------|
+| <img src="screenshots/movie1l1.png" width="200"/> | <img src="screenshots/movie1l2.png" width="200"/> | <img src="screenshots/movie1l3.png" width="200"/> | <img src="screenshots/movie1l4.png" width="200"/> |
 
 ## ✨ Features
 

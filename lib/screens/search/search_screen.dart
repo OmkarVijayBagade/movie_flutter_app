@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movie_flutter_app/models/genre.dart';
+import 'package:provider/provider.dart';
 import '../../models/movie.dart';
 import '../../services/movie_api_service.dart';
+import '../../providers/settings_provider.dart';
 import '../movie_detail/movie_detail_screen.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -72,6 +74,12 @@ class _SearchScreenState extends State<SearchScreen> {
     }
   }
 
+  Future<void> resetSearch() async {
+    _controller.clear();
+    selectedGenreId = null;
+    await loadDefaultMovies();
+  }
+
   final TextEditingController _controller = TextEditingController();
   List<Movie> movies = [];
   List<Movie> fullMovies = [];
@@ -127,9 +135,13 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<SettingsProvider>(
+      builder: (context, settings, child) {
+        return Scaffold(
       appBar: AppBar(title: const Text('Search')),
-      body: Column(
+      body: RefreshIndicator(
+        onRefresh: resetSearch,
+        child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(12),
@@ -249,6 +261,9 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ],
       ),
+    ),
+  );
+      },
     );
   }
 }

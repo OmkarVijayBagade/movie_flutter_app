@@ -9,13 +9,15 @@ A beautifully designed, feature-rich Flutter application for discovering and exp
 
 ## 📱 Screenshots
 
-| Onboarding | Home Screen | Movie Details |
-|------------|-------------|---------------|
-| ![Onboarding](screenshots/onboarding_screen.png) | ![Home](screenshots/home_screen.png) | ![Details](screenshots/movie_details.png) |
+ ![Home](screenshots/movie1d1.png) | ![Details](screenshots/movie1d2.png) |
 
-| Search | Settings |
 |--------|----------|
-| ![Search](screenshots/search_screen.png) | ![Settings](screenshots/settings_screen.png) |
+| ![Search](screenshots/movie1d3.png) | ![Settings](screenshots/movie1d4.png) |
+
+| ![Onboarding](screenshots/onboarding_screen.png) | ![Home](screenshots/movie1l1.png) | ![Details](screenshots/movie1l2.png) |
+
+|--------|----------|
+| ![Search](screenshots/movie1l3.png) | ![Settings](screenshots/movie1l4.png) |
 
 ## ✨ Features
 
